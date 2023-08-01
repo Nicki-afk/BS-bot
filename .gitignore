@@ -4,6 +4,10 @@
 # Log files
 *.log
 
+# Property files
+*.properties
+**/resources/
+
 # IntelliJ IDEA files
 .idea/
 
