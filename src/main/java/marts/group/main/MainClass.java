@@ -10,6 +10,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+import marts.group.calendarAPI.GoogleCalendarAPI;
+
 /**
  * Hello world!
  *
@@ -24,7 +26,7 @@ public class MainClass
         BotClass botClass = new BotClass();
         
         botClass
-            .configBot()
+            .configSystem()
             .startBot();
     }
 
@@ -34,12 +36,13 @@ public class MainClass
 
 class BotClass extends TelegramLongPollingBot{
     private Properties telegramBotProperties = new Properties();
+    private GoogleCalendarAPI googleCalendarAPI;
     private String botName;
     private String botToken;
 
 
 
-    public BotClass configBot(){
+    public BotClass configSystem(){
         try{
 
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -49,6 +52,10 @@ class BotClass extends TelegramLongPollingBot{
 
             this.botName = this.telegramBotProperties.getProperty("tg.bot.name");
             this.botToken = this.telegramBotProperties.getProperty("tg.bot.token");
+            
+            // Конфигурируем календарь 
+            this.googleCalendarAPI = new GoogleCalendarAPI();
+            this.googleCalendarAPI.configTheGoogleCalendarAPI(telegramBotProperties);
         
 
         }catch(Exception e){
