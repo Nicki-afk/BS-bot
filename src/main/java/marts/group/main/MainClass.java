@@ -12,6 +12,7 @@ import java.util.Properties;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
@@ -102,17 +103,35 @@ class BotClass extends TelegramLongPollingBot{
     public void onUpdateReceived(Update update) {
         String msg = "";
         Long chatId = 0L;
+        Integer messageId ;
 
 
         if(update.hasCallbackQuery()){
 
             msg = update.getCallbackQuery().getData();
             chatId = update.getCallbackQuery().getMessage().getChatId();
+            messageId = update.getCallbackQuery().getMessage().getMessageId();
 
-            switch(msg){
-                case "BACK" : 
-                    welcomeMessageWithServices(chatId);
-                break;    
+            try{
+                switch(msg){
+                    case "BACK" : 
+                        welcomeMessageWithServices(chatId);
+
+                         execute(
+                            EditMessageReplyMarkup
+                            .builder()
+                            .chatId(chatId)
+                            .messageId(messageId)
+                            .replyMarkup(null)
+                            .build()
+
+                         );
+                    break;    
+
+                }
+
+            }catch(Exception e){
+                e.printStackTrace();
 
             }
 
