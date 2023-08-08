@@ -150,7 +150,7 @@ class BotClass extends TelegramLongPollingBot{
             new KeyboardButton("Тонировка бороды ") ,
             new KeyboardButton("Комуфляж бороды ")  
         ));
-        
+
         ReplyKeyboardMarkup  replyKeyboardMarkup = new ReplyKeyboardMarkup(List.of(rowOne, rowTwo, rowThree, rowFor));
         replyKeyboardMarkup.setResizeKeyboard(true);
 
@@ -169,6 +169,41 @@ class BotClass extends TelegramLongPollingBot{
             e.printStackTrace();
 
         }
+    }
+
+    public void mensHaircut(Long chatId){
+        
+    }
+
+    public void beardModeling(Long chatId){
+
+    }
+
+    public void royalShave(Long chatId){
+
+
+    }
+
+    public void edging(Long chatId){
+
+    } 
+
+    public void childrensHaircut(Long chatId){
+
+
+    }
+
+    public void complex(Long chatId){
+
+    }
+
+    public void beardToning(Long chatId){
+
+
+    }
+
+    public void camoBeard(Long chatId){
+
     }
 
 
