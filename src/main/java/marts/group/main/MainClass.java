@@ -100,8 +100,35 @@ class BotClass extends TelegramLongPollingBot{
 
     @Override
     public void onUpdateReceived(Update update) {
-        String msg = update.getMessage().getText();
-        Long chatId = update.getMessage().getChatId();
+        String msg = "";
+        Long chatId = 0L;
+
+
+        if(update.hasCallbackQuery()){
+
+            msg = update.getCallbackQuery().getData();
+            chatId = update.getCallbackQuery().getMessage().getChatId();
+
+            switch(msg){
+                case "BACK" : 
+                    welcomeMessageWithServices(chatId);
+                break;    
+
+            }
+
+
+
+            return;
+
+
+
+
+        }
+
+        msg = update.getMessage().getText();
+        chatId = update.getMessage().getChatId();
+
+     
 
 
         try{
@@ -233,7 +260,7 @@ class BotClass extends TelegramLongPollingBot{
                         .callbackData("MENS_HAIRCUIT")
                         .text("Записаться \u270D\uFE0F")
                         .build() , 
-                        
+
                         InlineKeyboardButton
                         .builder()
                         .callbackData("BACK")
