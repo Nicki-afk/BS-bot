@@ -118,6 +118,10 @@ class BotClass extends TelegramLongPollingBot{
                     case "BACK" : 
                         welcomeMessageWithServices(chatId);
                         deleteReplyMarkupInPreviuosMessage(chatId, messageId);
+                    break;   
+                    
+                    case "MENS_HAIRCUIT" : 
+                        selectABarber(chatId, messageId);
                     break;    
 
                 }
