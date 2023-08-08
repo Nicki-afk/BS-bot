@@ -107,6 +107,39 @@ class BotClass extends TelegramLongPollingBot{
                     welcomeMessageWithServices(chatId);
                 break;
 
+                case "Мужская стрижка" : 
+                    mensHaircut(chatId);
+                break;
+                
+                case "Моделирование бороды" : 
+                    beardModeling(chatId);
+                break;
+                
+                case "Королевское бритье"  :
+                    royalShave(chatId);
+                break;
+                
+                case "Окантовка" : 
+                    edging(chatId);
+                break;
+                
+                case "Детская стрижка" : 
+                    childrensHaircut(chatId);
+                break;
+                
+                case "Комплекс" : 
+                    complex(chatId);
+                break;
+                
+                case "Тонировка бороды" : 
+                    beardToning(chatId);
+                break;
+                
+                case "Комуфляж бороды" : 
+                    camoBeard(chatId);
+                break;
+                
+    
                 default : 
                     execute(
                         SendMessage
