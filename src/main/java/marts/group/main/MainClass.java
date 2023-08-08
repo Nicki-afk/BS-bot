@@ -138,6 +138,10 @@ class BotClass extends TelegramLongPollingBot{
                 case "Комуфляж бороды" : 
                     camoBeard(chatId);
                 break;
+
+                case "Назад \u2B06\uFE0F" : 
+                    welcomeMessageWithServices(chatId);
+                break;    
                 
     
                 default : 
