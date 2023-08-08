@@ -2,12 +2,19 @@ package marts.group.main;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import marts.group.calendarAPI.GoogleCalendarAPI;
@@ -97,13 +104,7 @@ class BotClass extends TelegramLongPollingBot{
 
                 case "/start" : 
 
-                    execute(
-                        SendMessage
-                            .builder()
-                            .chatId(chatId)
-                            .text("Hi i'm barbershop bot!")
-                            .build()
-                    ); 
+                    welcomeMessageWithServices(chatId);
                 break;
 
                 default : 
@@ -125,6 +126,49 @@ class BotClass extends TelegramLongPollingBot{
 
         
         
+    }
+
+
+    public void welcomeMessageWithServices(Long chatId){
+
+        KeyboardRow rowOne = new KeyboardRow(List.of(
+            new KeyboardButton("Мужская стрижка") ,
+            new KeyboardButton("Моделирование бороды ")  
+        ));
+
+        KeyboardRow rowTwo = new KeyboardRow(List.of(
+            new KeyboardButton("Королевское бритье") ,
+            new KeyboardButton("Окантовка")  
+        ));
+
+        KeyboardRow rowThree = new KeyboardRow(List.of(
+            new KeyboardButton("Детская стрижка") ,
+            new KeyboardButton("Комплекс")  
+        ));
+
+        KeyboardRow rowFor = new KeyboardRow(List.of(
+            new KeyboardButton("Тонировка бороды ") ,
+            new KeyboardButton("Комуфляж бороды ")  
+        ));
+        
+        ReplyKeyboardMarkup  replyKeyboardMarkup = new ReplyKeyboardMarkup(List.of(rowOne, rowTwo, rowThree, rowFor));
+        replyKeyboardMarkup.setResizeKeyboard(true);
+
+        try{
+            execute(
+
+                SendMessage
+                    .builder()
+                    .chatId(chatId)
+                    .text("Hello")
+                    .replyMarkup(replyKeyboardMarkup)
+                    .build()
+            );
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
     }
 
 
