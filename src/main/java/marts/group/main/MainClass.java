@@ -116,16 +116,7 @@ class BotClass extends TelegramLongPollingBot{
                 switch(msg){
                     case "BACK" : 
                         welcomeMessageWithServices(chatId);
-
-                         execute(
-                            EditMessageReplyMarkup
-                            .builder()
-                            .chatId(chatId)
-                            .messageId(messageId)
-                            .replyMarkup(null)
-                            .build()
-
-                         );
+                        deleteReplyMarkupInPreviuosMessage(chatId, messageId);
                     break;    
 
                 }
@@ -216,6 +207,27 @@ class BotClass extends TelegramLongPollingBot{
 
         
         
+    }
+
+
+    public void deleteReplyMarkupInPreviuosMessage(Long chatId , Integer messageId){
+        try{
+
+            execute(
+                EditMessageReplyMarkup
+                            .builder()
+                            .chatId(chatId)
+                            .messageId(messageId)
+                            .replyMarkup(null)
+                            .build()
+
+            );
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+
     }
 
 
