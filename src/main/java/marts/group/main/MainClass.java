@@ -13,6 +13,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
@@ -277,10 +278,7 @@ class BotClass extends TelegramLongPollingBot{
 
         try{
 
-            KeyboardRow row = new KeyboardRow(List.of(new KeyboardButton("Назад \u2B06\uFE0F")));
-            ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup(Collections.singletonList(row));
-            replyKeyboardMarkup.setResizeKeyboard(true);
-
+      
             
             InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup(
                 
@@ -336,6 +334,49 @@ class BotClass extends TelegramLongPollingBot{
 
         }
         
+    }
+
+    public void selectABarber(Long chatId , Integer messageId){
+
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup(
+                
+                Collections.singletonList(
+                  List.of(
+                    InlineKeyboardButton
+                    .builder()
+                    .callbackData("MENS_HAIRCUIT_STEFAN")
+                    .text("Штефан")
+                    .build() , 
+
+                    InlineKeyboardButton
+                    .builder()
+                    .callbackData("MENS_HAIRCUIT_RASUL")
+                    .text("Расул")
+                    .build()
+                )  
+            )
+        );
+
+        try{
+
+            execute(
+
+                EditMessageText
+                .builder()
+                .text("Выбирете мастера")
+                .chatId(chatId)
+                .messageId(messageId)
+                .replyMarkup(inlineKeyboardMarkup)
+                .build()
+            );
+            
+
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     public void beardModeling(Long chatId){
