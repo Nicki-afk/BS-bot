@@ -4,20 +4,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import marts.group.calendarAPI.GoogleCalendarAPI;
+import marts.group.pojo.Order;
 
 /**
  * Hello world!
@@ -46,6 +51,7 @@ class BotClass extends TelegramLongPollingBot{
     private GoogleCalendarAPI googleCalendarAPI;
     private String botName;
     private String botToken;
+    private Map<Long , Order> personOrder = new HashMap<>();
 
 
 
@@ -105,6 +111,7 @@ class BotClass extends TelegramLongPollingBot{
                 case "/start" : 
 
                     welcomeMessageWithServices(chatId);
+                    this.personOrder.putIfAbsent(chatId, new Order());
                 break;
 
                 case "Мужская стрижка" : 
@@ -212,9 +219,25 @@ class BotClass extends TelegramLongPollingBot{
 
         try{
 
-            KeyboardRow row = new KeyboardRow(List.of(new KeyboardButton("Записаться \u270D\uFE0F") , new KeyboardButton("Назад \u2B06\uFE0F")));
-            ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup(Collections.singletonList(row));
-            replyKeyboardMarkup.setResizeKeyboard(true);
+            // KeyboardRow row = new KeyboardRow(List.of(new KeyboardButton("Записаться \u270D\uFE0F") , new KeyboardButton("Назад \u2B06\uFE0F")));
+            // ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup(Collections.singletonList(row));
+            // replyKeyboardMarkup.setResizeKeyboard(true);
+
+            
+            InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup(
+                
+                Collections.singletonList(
+                  Collections.singletonList(
+                    InlineKeyboardButton
+                        .builder()
+                        .callbackData("MENS_HAIRCUIT")
+                        .text("Записаться \u270D\uFE0F")
+                        .build()
+                  )  
+                )
+            );
+
+
 
             execute(
 
@@ -238,7 +261,7 @@ class BotClass extends TelegramLongPollingBot{
                             "\n" + //
                             "\u0426\u0435\u043D\u0430 \u0443\u0441\u043B\u0443\u0433\u0438 450"
                     )
-                .replyMarkup(replyKeyboardMarkup)
+                .replyMarkup(inlineKeyboardMarkup)
                 .build()
             );
 
