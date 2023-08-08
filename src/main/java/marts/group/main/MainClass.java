@@ -219,19 +219,25 @@ class BotClass extends TelegramLongPollingBot{
 
         try{
 
-            // KeyboardRow row = new KeyboardRow(List.of(new KeyboardButton("Записаться \u270D\uFE0F") , new KeyboardButton("Назад \u2B06\uFE0F")));
-            // ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup(Collections.singletonList(row));
-            // replyKeyboardMarkup.setResizeKeyboard(true);
+            KeyboardRow row = new KeyboardRow(List.of(new KeyboardButton("Назад \u2B06\uFE0F")));
+            ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup(Collections.singletonList(row));
+            replyKeyboardMarkup.setResizeKeyboard(true);
 
             
             InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup(
                 
                 Collections.singletonList(
-                  Collections.singletonList(
+                  List.of(
                     InlineKeyboardButton
                         .builder()
                         .callbackData("MENS_HAIRCUIT")
                         .text("Записаться \u270D\uFE0F")
+                        .build() , 
+                        
+                        InlineKeyboardButton
+                        .builder()
+                        .callbackData("BACK")
+                        .text("Назад \u2B06\uFE0F")
                         .build()
                   )  
                 )
