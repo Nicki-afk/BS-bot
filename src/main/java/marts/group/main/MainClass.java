@@ -208,7 +208,7 @@ class BotClass extends TelegramLongPollingBot{
 
         try{
 
-            KeyboardRow row = new KeyboardRow(Collections.singletonList(KeyboardButton.builder().text("Записаться").build()));
+            KeyboardRow row = new KeyboardRow(List.of(new KeyboardButton("Записаться \u270D\uFE0F") , new KeyboardButton("Назад \u2B06\uFE0F")));
             ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup(Collections.singletonList(row));
             replyKeyboardMarkup.setResizeKeyboard(true);
 
