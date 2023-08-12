@@ -130,8 +130,21 @@ class BotClass extends TelegramLongPollingBot{
                     case "MENS_HAIRCUIT_RASUL" : 
                         Order order2 = personOrder.get(chatId);
                         order2.setBarber(new Barber("Rasul", "wfwefwef", "wefewfwef"));
-                        
+                        selectATime(chatId, messageId);
 
+
+                    break;
+
+                    case "MENS_HAIRCUIT_STEFAN" : 
+                        Order order3 = personOrder.get(chatId);
+                        order3.setBarber(new Barber("Stefan", "wfwefwef", "wefewfwef"));
+                        selectATime(chatId, messageId);
+
+                    break;
+
+                    case "MENS_HAIRCUIT_BACK" : 
+
+                        selectABarber(chatId, messageId);
                     break;
 
                 }
@@ -390,6 +403,96 @@ class BotClass extends TelegramLongPollingBot{
         }catch(Exception e){
             e.printStackTrace();
         }
+
+    }
+
+    public void selectATime(Long chatId , Integer messageId ){
+
+        // Calendar logic 
+
+        // Temporary
+        try{
+
+            Order order = this.personOrder.get(chatId);
+            Barber barber = order.getBarber();
+
+            String barberName = barber.getFirstName().toUpperCase();
+
+
+            InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup(
+
+                List.of(
+
+                    List.of(
+                    InlineKeyboardButton
+                        .builder()
+                        .callbackData("MENS_HAIRCUIT_" + barberName + "_13:00")
+                        .text("13:00")
+                        .build()
+                    ) , 
+
+                    List.of(
+                    InlineKeyboardButton
+                        .builder()
+                        .callbackData("MENS_HAIRCUIT_" + barberName +  "_14:00")
+                        .text("14:00")
+                        .build()
+                    ) , 
+                        
+                    List.of(
+                    InlineKeyboardButton
+                        .builder()
+                        .callbackData("MENS_HAIRCUIT_" + barberName + "_15:00")
+                        .text("15:00")
+                        .build()
+                    ) , 
+
+                    List.of(
+                    InlineKeyboardButton
+                        .builder()
+                        .callbackData("MENS_HAIRCUIT_"  + barberName + "_16:00")
+                        .text("16:00")
+                        .build()
+                    )  , 
+
+                    List.of(
+                    InlineKeyboardButton
+                        .builder()
+                        .callbackData("MENS_HAIRCUIT_BACK")
+                        .text("Назад")
+                        .build()
+                    )  
+
+
+                )
+                
+            );
+
+
+
+            execute(
+
+                EditMessageText.
+                            builder()
+                            .chatId(chatId)
+                            .messageId(messageId)
+                            .text("Выбирте время")
+                            .replyMarkup(inlineKeyboardMarkup)
+                            .build()
+
+
+            );
+
+
+            
+
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+
 
     }
 
