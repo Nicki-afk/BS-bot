@@ -121,6 +121,8 @@ class BotClass extends TelegramLongPollingBot{
                     break;   
                     
                     case "MENS_HAIRCUIT" : 
+                        Order order = new Order(chatId, null, msg, Collections.singletonList("Мужская срижка"));
+                        personOrder.put(chatId, order);
                         selectABarber(chatId, messageId);
                     break;    
 
