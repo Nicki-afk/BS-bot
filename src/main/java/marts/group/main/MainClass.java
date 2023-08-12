@@ -24,6 +24,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import marts.group.calendarAPI.GoogleCalendarAPI;
+import marts.group.pojo.Barber;
 import marts.group.pojo.Order;
 
 /**
@@ -125,6 +126,13 @@ class BotClass extends TelegramLongPollingBot{
                         personOrder.put(chatId, order);
                         selectABarber(chatId, messageId);
                     break;    
+
+                    case "MENS_HAIRCUIT_RASUL" : 
+                        Order order2 = personOrder.get(chatId);
+                        order2.setBarber(new Barber("Rasul", "wfwefwef", "wefewfwef"));
+                        
+
+                    break;
 
                 }
 
